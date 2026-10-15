@@ -1,27 +1,27 @@
 package fr.greenmove.facturation.domaine;
 
-public record Montant(long centimes) {
+public final class Montant {
 
-    public static final Montant ZERO = new Montant(0);
+    private final int centimes;
 
-    public Montant {
-        if (centimes < 0)
-            throw new IllegalArgumentException("Montant Négatif");
+    public Montant(int centimes) {
+        this.centimes = centimes;
     }
 
-    public Montant plus(Montant autre) {
-        return new Montant(this.centimes + autre.centimes);
+    public int getCentimes() {
+        return centimes;
     }
 
-    public Montant fois(long n) {
-        return new Montant(this.centimes * n);
+    public double getEuros() {
+        return centimes / 100.0;
     }
 
-    public Montant plafondA(Montant max) {
-        return this.centimes > max.centimes ? max : this;
+    public Montant plafonneA(Montant plafond) {
+        return centimes > plafond.getCentimes() ? plafond : this;
     }
 
-    public Montant moinsPourcent(int pourcent) {
-        return new Montant(centimes - centimes * pourcent / 100);
+    public Montant reduitDe(int pourcent) {
+        int remise = centimes * pourcent / 100;
+        return new Montant(centimes - remise);
     }
 }

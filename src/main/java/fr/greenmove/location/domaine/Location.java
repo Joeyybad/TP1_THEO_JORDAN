@@ -1,7 +1,6 @@
 package fr.greenmove.location.domaine;
 
 import java.time.Duration;
-// CHECKER POUR INSTANT
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
