@@ -1,55 +1,98 @@
 package fr.greenmove.location.infrastructure.config;
 
-import fr.greenmove.exterieur.FlotteEnMemoire;
-import fr.greenmove.location.domaine.Flotte;
-import fr.greenmove.location.infrastructure.flotte.FlotteSurSimulation;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import fr.greenmove.exterieur.FlotteEnMemoire;
+import fr.greenmove.exterieur.UsagersEnMemoire;
+import fr.greenmove.facturation.application.ConsulterImpayes;
+import fr.greenmove.location.application.ServiceLocation;
+import fr.greenmove.location.domaine.GenerateurIdentifiants;
+import fr.greenmove.location.domaine.Ports.*;
+import fr.greenmove.location.infrastructure.evenements.PublicationSurBusSpring;
+import fr.greenmove.location.infrastructure.flotte.FlotteSurSimulation;
+import fr.greenmove.location.infrastructure.impayes.ImpayesParFacturation;
+import fr.greenmove.location.infrastructure.persistance.LocationJpaRepository;
+import fr.greenmove.location.infrastructure.persistance.LocationsJpa;
+import fr.greenmove.location.infrastructure.temps.HorlogeSysteme;
+import fr.greenmove.location.infrastructure.usagers.UsagersSurSimulation;
+
 /**
- * Le câblage de l'hexagone Location : la seule classe qui sait quelle implémentation se cache derrière chaque port.
+ * Le câblage de l'hexagone Location : la seule classe qui sait quelle
+ * implémentation se cache derrière chaque port.
  *
- * <p>Le principe, montré avec le port {@link Flotte} : chaque méthode {@code @Bean} construit un adaptateur et le
- * déclare <b>sous le type de son port</b>. Spring fournit en paramètre les beans dont la méthode a besoin (ici
- * {@code FlotteEnMemoire}, déclaré dans {@code ConfigurationExterieur}). Le cas d'usage reçoit ensuite les ports
- * par constructeur, sans savoir qui les implémente. Ni le domaine ni l'application ne portent d'annotation.</p>
+ * <p>
+ * Le principe, montré avec le port {@link Flotte} : chaque méthode
+ * {@code @Bean} construit un adaptateur et le
+ * déclare <b>sous le type de son port</b>. Spring fournit en paramètre les
+ * beans dont la méthode a besoin (ici
+ * {@code FlotteEnMemoire}, déclaré dans {@code ConfigurationExterieur}). Le cas
+ * d'usage reçoit ensuite les ports
+ * par constructeur, sans savoir qui les implémente. Ni le domaine ni
+ * l'application ne portent d'annotation.
+ * </p>
  *
- * <p>À compléter : les autres ports sur le même modèle, puis {@code ServiceLocation}.</p>
+ * <p>
+ * À compléter : les autres ports sur le même modèle, puis
+ * {@code ServiceLocation}.
+ * </p>
  */
 @Configuration
 public class ConfigurationLocation {
 
-    /** L'exemple fourni : le port Flotte est servi par l'adaptateur FlotteSurSimulation. */
+    /**
+     * L'exemple fourni : le port Flotte est servi par l'adaptateur
+     * FlotteSurSimulation.
+     */
     @Bean
     Flotte flotte(FlotteEnMemoire simulation) {
         return new FlotteSurSimulation(simulation);
     }
 
     // Les suivants, à écrire sur le même modèle :
+
+    @Bean
+    Usagers usagers(UsagersEnMemoire simulation) {
+        return new UsagersSurSimulation(simulation);
+    }
+
+    @Bean
+    Horloge horloge() {
+        return new HorlogeSysteme();
+    }
+
+    @Bean
+    Impayes impayes(ConsulterImpayes consulterImpayes) {
+        return new ImpayesParFacturation(consulterImpayes);
+    }
+
+    @Bean
+    PublicationEvenements publication(ApplicationEventPublisher bus) {
+        return new PublicationSurBusSpring(bus);
+    }
+
+    @Bean
+    Locations locations(LocationJpaRepository jpa) {
+        return new LocationsJpa(jpa);
+    }
+
+    @Bean
+    GenerateurIdentifiants generateurIdentifiants() {
+        return new GenerateurIdentifiants();
+    }
+
+    // Puis le cas d'usage, qui reçoit les ports (les interfaces), jamais les
+    // adaptateurs :
+
+    @Bean
+    ServiceLocation serviceLocation(Locations locations, Flotte flotte, Usagers usagers, Impayes impayes,
+            PublicationEvenements publication, Horloge horloge, GenerateurIdentifiants generateurIdentifiants) {
+        return new ServiceLocation(locations, usagers, flotte, impayes, horloge, generateurIdentifiants, publication);
+    }
     //
-    // @Bean
-    // Usagers usagers(UsagersEnMemoire simulation) { return new UsagersSurSimulation(simulation); }
-    //
-    // @Bean
-    // Horloge horloge() { return new HorlogeSysteme(); }
-    //
-    // @Bean
-    // Impayes impayes(ConsulterImpayes consulterImpayes) { return new ImpayesParFacturation(consulterImpayes); }
-    //
-    // @Bean
-    // PublicationEvenements publication(ApplicationEventPublisher bus) { return new PublicationSurBusSpring(bus); }
-    //
-    // @Bean
-    // Locations locations(LocationJpaRepository jpa) { return new LocationsJpa(jpa); }
-    //
-    // Puis le cas d'usage, qui reçoit les ports (les interfaces), jamais les adaptateurs :
-    //
-    // @Bean
-    // ServiceLocation serviceLocation(Locations locations, Flotte flotte, Usagers usagers, Impayes impayes,
-    //                                 PublicationEvenements publication, Horloge horloge) {
-    //     return new ServiceLocation(locations, flotte, usagers, impayes, publication, horloge);
-    // }
-    //
-    // Le contrôleur REST, lui, est annoté @RestController et reçoit ServiceLocation par constructeur, sous le type
-    // de ses ports entrants (DemarrerLocation, TerminerLocation, ConsulterLocation).
+    // Le contrôleur REST, lui, est annoté @RestController et reçoit ServiceLocation
+    // par constructeur, sous le type
+    // de ses ports entrants (DemarrerLocation, TerminerLocation,
+    // ConsulterLocation).
 }

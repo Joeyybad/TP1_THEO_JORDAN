@@ -1,18 +1,18 @@
 package fr.greenmove.location.infrastructure.flotte;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
 import fr.greenmove.exterieur.FlotteEnMemoire;
-import fr.greenmove.location.domaine.Flotte;
 import fr.greenmove.location.domaine.IdVehicule;
 import fr.greenmove.location.domaine.TypeVehicule;
 import fr.greenmove.location.domaine.Vehicule;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import fr.greenmove.location.domaine.Ports.Flotte;
 
 /**
- * Le test d'un adaptateur, fourni en exemple : on construit l'adaptateur à la main avec le vrai système extérieur
+ * Le test d'un adaptateur, fourni en exemple : on construit l'adaptateur à la
+ * main avec le vrai système extérieur
  * (ici la simulation), sans Spring. Il tourne en quelques millisecondes.
  */
 class FlotteSurSimulationTest {
