@@ -13,7 +13,10 @@ public class ImpayesParFacturation implements Impayes {
     }
 
     @Override
-    public boolean aDesImpayes(IdUsager usager) {
-        return consulterImpayes.aUneFactureImpayee(usager.toString());
+    public boolean aDesImpayes(IdUsager usagerId) {
+        fr.greenmove.facturation.domaine.IdUsager usagerFacturation = new fr.greenmove.facturation.domaine.IdUsager(
+                usagerId.valeur());
+
+        return consulterImpayes.aDesImpayes(usagerFacturation);
     }
 }

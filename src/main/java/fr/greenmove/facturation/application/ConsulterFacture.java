@@ -1,4 +1,4 @@
-package fr.greenmove.facturation.domaine.application;
+package fr.greenmove.facturation.application;
 
 import java.util.Optional;
 

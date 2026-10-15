@@ -1,5 +1,6 @@
 package fr.greenmove.location.application;
 
+import java.time.Duration;
 import java.util.Optional;
 
 import fr.greenmove.location.domaine.*;
@@ -44,7 +45,7 @@ public class ServiceLocation implements DemarrerLocation, TerminerLocation, Cons
         }
 
         // 2. L'usager existe (port Usagers)
-        if (usagers.existe(usagerId)) {
+        if (!usagers.existe(usagerId)) {
             throw new UsagerInconnu(usagerId);
         }
 
@@ -87,7 +88,7 @@ public class ServiceLocation implements DemarrerLocation, TerminerLocation, Cons
             location.evenementsEmis().forEach(publicationEvenements::publier);
         }
 
-        return new Recu(idLocation, location.debut(), location.fin(), location.duree());
+        return new Recu(idLocation, location.debut(), location.fin(), Duration.ofMinutes(location.duree()));
     }
 
     // ConsulterLocation

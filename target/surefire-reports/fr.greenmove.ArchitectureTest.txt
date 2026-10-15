@@ -1,0 +1,27 @@
+-------------------------------------------------------------------------------
+Test set: fr.greenmove.ArchitectureTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 3.540 s <<< FAILURE! -- in fr.greenmove.ArchitectureTest
+fr.greenmove.ArchitectureTest.le_domaine_ne_depend_d_aucune_technique -- Time elapsed: 3.467 s <<< FAILURE!
+java.lang.AssertionError: 
+Architecture Violation [Priority: MEDIUM] - Rule 'no classes that reside in a package '..domaine..' should depend on classes that reside in any package ['..infrastructure..', '..application..', 'fr.greenmove.exterieur..', 'org.springframework..', 'jakarta.persistence..', 'com.fasterxml..']' was violated (12 times):
+Class <fr.greenmove.facturation.domaine.application.ServiceFacturation> implements interface <fr.greenmove.facturation.domaine.application.ConsulterFacture> in (ServiceFacturation.java:0)
+Class <fr.greenmove.facturation.domaine.application.ServiceFacturation> implements interface <fr.greenmove.facturation.domaine.application.EmettreFacture> in (ServiceFacturation.java:0)
+Class <fr.greenmove.facturation.domaine.application.ServiceFacturation> implements interface <fr.greenmove.facturation.domaine.application.RegulariserFacture> in (ServiceFacturation.java:0)
+Constructor <fr.greenmove.facturation.domaine.application.ServiceFacturation.<init>(fr.greenmove.facturation.domaine.application.EmettreFacture, fr.greenmove.facturation.domaine.application.ConsulterFacture, fr.greenmove.facturation.domaine.application.RegulariserFacture, fr.greenmove.facturation.domaine.ports.Abonnements, fr.greenmove.facturation.domaine.GrilleTarifaire)> has parameter of type <fr.greenmove.facturation.domaine.application.ConsulterFacture> in (ServiceFacturation.java:0)
+Constructor <fr.greenmove.facturation.domaine.application.ServiceFacturation.<init>(fr.greenmove.facturation.domaine.application.EmettreFacture, fr.greenmove.facturation.domaine.application.ConsulterFacture, fr.greenmove.facturation.domaine.application.RegulariserFacture, fr.greenmove.facturation.domaine.ports.Abonnements, fr.greenmove.facturation.domaine.GrilleTarifaire)> has parameter of type <fr.greenmove.facturation.domaine.application.EmettreFacture> in (ServiceFacturation.java:0)
+Constructor <fr.greenmove.facturation.domaine.application.ServiceFacturation.<init>(fr.greenmove.facturation.domaine.application.EmettreFacture, fr.greenmove.facturation.domaine.application.ConsulterFacture, fr.greenmove.facturation.domaine.application.RegulariserFacture, fr.greenmove.facturation.domaine.ports.Abonnements, fr.greenmove.facturation.domaine.GrilleTarifaire)> has parameter of type <fr.greenmove.facturation.domaine.application.RegulariserFacture> in (ServiceFacturation.java:0)
+Field <fr.greenmove.facturation.domaine.application.ServiceFacturation.consulteur> has type <fr.greenmove.facturation.domaine.application.ConsulterFacture> in (ServiceFacturation.java:0)
+Field <fr.greenmove.facturation.domaine.application.ServiceFacturation.emetteur> has type <fr.greenmove.facturation.domaine.application.EmettreFacture> in (ServiceFacturation.java:0)
+Field <fr.greenmove.facturation.domaine.application.ServiceFacturation.regulariseur> has type <fr.greenmove.facturation.domaine.application.RegulariserFacture> in (ServiceFacturation.java:0)
+Method <fr.greenmove.facturation.domaine.application.ServiceFacturation.consulter(fr.greenmove.facturation.domaine.IdFacture)> calls method <fr.greenmove.facturation.domaine.application.ConsulterFacture.consulter(fr.greenmove.facturation.domaine.IdFacture)> in (ServiceFacturation.java:37)
+Method <fr.greenmove.facturation.domaine.application.ServiceFacturation.emettre(fr.greenmove.facturation.domaine.IdLocation, fr.greenmove.facturation.domaine.IdUsager, fr.greenmove.facturation.domaine.TypeVehicule, java.time.Duration)> calls method <fr.greenmove.facturation.domaine.application.EmettreFacture.emettre(fr.greenmove.facturation.domaine.IdLocation, fr.greenmove.facturation.domaine.IdUsager, fr.greenmove.facturation.domaine.TypeVehicule, java.time.Duration)> in (ServiceFacturation.java:27)
+Method <fr.greenmove.facturation.domaine.application.ServiceFacturation.regulariser(fr.greenmove.facturation.domaine.IdFacture)> calls method <fr.greenmove.facturation.domaine.application.RegulariserFacture.regulariser(fr.greenmove.facturation.domaine.IdFacture)> in (ServiceFacturation.java:32)
+	at com.tngtech.archunit.lang.ArchRule$Assertions.assertNoViolation(ArchRule.java:94)
+	at com.tngtech.archunit.lang.ArchRule$Assertions.check(ArchRule.java:86)
+	at com.tngtech.archunit.lang.ArchRule$Factory$SimpleArchRule.check(ArchRule.java:165)
+	at com.tngtech.archunit.junit.internal.ArchUnitTestDescriptor$ArchUnitRuleDescriptor.execute(ArchUnitTestDescriptor.java:168)
+	at com.tngtech.archunit.junit.internal.ArchUnitTestDescriptor$ArchUnitRuleDescriptor.execute(ArchUnitTestDescriptor.java:151)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

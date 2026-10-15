@@ -2,6 +2,7 @@ package fr.greenmove.facturation.domaine;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Facture {
 
@@ -11,6 +12,7 @@ public class Facture {
     private final Montant montant;
     private final Instant dateEmission;
     private Statut statut;
+    private ReferencePaiement referencePaiement;
 
     private Facture(
             IdFacture id,
@@ -18,43 +20,54 @@ public class Facture {
             IdLocation idLocation,
             Montant montant,
             Instant dateEmission,
-            Statut statut) {
-        this.id = Objects.requireNonNull(id, "L'identifiant de facture est obligatoire");
-        this.idUsager = Objects.requireNonNull(idUsager, "L'identifiant usager est obligatoire");
-        this.idLocation = Objects.requireNonNull(idLocation, "L'identifiant location est obligatoire");
-        this.montant = Objects.requireNonNull(montant, "Le montant est obligatoire");
-        this.dateEmission = Objects.requireNonNull(dateEmission, "La date d'émission est obligatoire");
-        this.statut = Objects.requireNonNull(statut, "Le statut est obligatoire");
+            Statut statut,
+            ReferencePaiement referencePaiement) {
+        this.id = Objects.requireNonNull(id);
+        this.idUsager = Objects.requireNonNull(idUsager);
+        this.idLocation = Objects.requireNonNull(idLocation);
+        this.montant = Objects.requireNonNull(montant);
+        this.dateEmission = Objects.requireNonNull(dateEmission);
+        this.statut = Objects.requireNonNull(statut);
+        this.referencePaiement = referencePaiement;
     }
 
-    public static Facture emettre(
+    public static Facture emettrePayee(
             IdFacture id,
-            IdUsager idUsager,
-            IdLocation idLocation,
+            IdUsager usager,
+            IdLocation location,
+            Montant montant,
+            Instant dateEmission,
+            ReferencePaiement reference) {
+        return new Facture(id, usager, location, montant, dateEmission, Statut.PAYEE,
+                Objects.requireNonNull(reference));
+    }
+
+    public static Facture emettreImpayee(
+            IdFacture id,
+            IdUsager usager,
+            IdLocation location,
             Montant montant,
             Instant dateEmission) {
-        return new Facture(id, idUsager, idLocation, montant, dateEmission, Statut.IMPAYEE);
+        return new Facture(id, usager, location, montant, dateEmission, Statut.IMPAYEE, null);
+    }
+
+    public void regulariser(ReferencePaiement reference) {
+        if (this.statut == Statut.PAYEE) {
+            throw new IllegalStateException("Facture déjà payée");
+        }
+        this.statut = Statut.PAYEE;
+        this.referencePaiement = Objects.requireNonNull(reference);
     }
 
     public static Facture reconstituer(
             IdFacture id,
-            IdUsager idUsager,
-            IdLocation idLocation,
+            IdUsager usager,
+            IdLocation location,
             Montant montant,
             Instant dateEmission,
-            Statut statut) {
-        return new Facture(id, idUsager, idLocation, montant, dateEmission, statut);
-    }
-
-    public void marquerCommePayee() {
-        if (this.statut == Statut.PAYEE) {
-            throw new IllegalStateException("Facture déjà payée : " + id.valeur());
-        }
-        this.statut = Statut.PAYEE;
-    }
-
-    public void marquerCommeImpayee() {
-        this.statut = Statut.IMPAYEE;
+            Statut statut,
+            ReferencePaiement referencePaiement) {
+        return new Facture(id, usager, location, montant, dateEmission, statut, referencePaiement);
     }
 
     public IdFacture id() {
@@ -79,5 +92,9 @@ public class Facture {
 
     public Statut statut() {
         return statut;
+    }
+
+    public Optional<ReferencePaiement> referencePaiement() {
+        return Optional.ofNullable(referencePaiement);
     }
 }

@@ -26,7 +26,6 @@ public class Location {
         this.vehicule = vehicule;
         this.type = type;
         this.debut = debut;
-
     }
 
     public static Location demarrer(IdLocation id, IdUsager usager, IdVehicule vehicule, TypeVehicule type,
@@ -50,9 +49,6 @@ public class Location {
 
         this.fin = maintenant;
         this.statut = Statut.TERMINEE;
-
-        // Invariant 3 : calcul de durée en minutes
-        Duration duree = Duration.between(this.debut, this.fin);
 
         // On émet l'événement de domaine sans argent : Facturation s'en chargera !
         this.evenements.add(new LocationTerminee(
@@ -91,15 +87,20 @@ public class Location {
         return statut;
     }
 
-    public Duration duree() {
-        return Duration.between(this.debut, this.fin);
+    // Invariant 3 : calcul de durée en minutes entières
+    public long duree() {
+        if (this.fin == null) {
+            throw new IllegalStateException("La location n'est pas encore terminée.");
+        }
+        return Duration.between(this.debut, this.fin).toMinutes();
     }
 
     public List<LocationTerminee> evenementsEmis() {
         return Collections.unmodifiableList(evenements);
     }
 
-    // Fabrique static pour reconstituer le mappage de l'entité JPA vers le domaine
+    // Fabrique statique pour reconstituer le mapping de l'entité JPA vers le
+    // domaine
     public static Location reconstituer(
             IdLocation id,
             IdUsager usager,

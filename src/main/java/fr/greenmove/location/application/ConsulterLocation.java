@@ -13,5 +13,5 @@ public interface ConsulterLocation {
      * @param id l'identifiant typé de la location recherchée
      * @return un Optional contenant la Location si trouvée, ou vide sinon
      */
-    Optional<Location> executer(IdLocation id);
+    Optional<Location> consulter(IdLocation id);
 }

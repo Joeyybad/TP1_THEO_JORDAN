@@ -1,7 +1,7 @@
 package fr.greenmove.facturation.domaine.erreurs;
 
-public class PaiementEncoreRefuse extends {
+public class PaiementEncoreRefuse extends RuntimeException {
     public PaiementEncoreRefuse(String id) {
-        super("Le paiement " + id + " à encore été refusé");
+        super("Le paiement " + id + " a encore été refusé");
     }
 }

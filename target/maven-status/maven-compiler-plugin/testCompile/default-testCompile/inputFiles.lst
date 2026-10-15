@@ -1,0 +1,9 @@
+/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/test/java/fr/greenmove/ArchitectureTest.java
+/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/test/java/fr/greenmove/GreenMoveApplicationTest.java
+/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/test/java/fr/greenmove/ScenarioBoutEnBoutTest.java
+/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/test/java/fr/greenmove/location/application/ServiceLocationTest.java
+/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/test/java/fr/greenmove/location/domaine/LocationTest.java
+/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/test/java/fr/greenmove/location/infrastructure/HorlogeFixe.java
+/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/test/java/fr/greenmove/location/infrastructure/ImpayesToujoursFaux.java
+/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/test/java/fr/greenmove/location/infrastructure/LocationsEnMemoire.java
+/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/test/java/fr/greenmove/location/infrastructure/flotte/FlotteSurSimulationTest.java
