@@ -1,29 +1,48 @@
 package fr.greenmove.facturation.infrastructure.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Le câblage de l'hexagone Facturation.
- *
- * <p>À compléter : vos adaptateurs comme beans des ports du domaine ({@code Factures}, {@code Paiement} sur
- * {@code PaiementSimule}, {@code Abonnements} sur {@code UsagersEnMemoire}), puis {@code ServiceFacturation}
- * construit avec ces ports et la grille tarifaire. Déclarez-le sous le type de ses ports entrants : Location a
- * besoin d'un bean {@code ConsulterImpayes}.</p>
- */
+import fr.greenmove.exterieur.PaiementSimule;
+import fr.greenmove.facturation.application.ServiceFacturation;
+import fr.greenmove.facturation.domaine.GrilleTarifaire;
+import fr.greenmove.facturation.domaine.ports.Abonnements;
+import fr.greenmove.facturation.domaine.ports.Factures;
+import fr.greenmove.facturation.domaine.ports.Paiement;
+import fr.greenmove.facturation.infrastructure.abonnements.AbonnementsParUsagers;
+import fr.greenmove.facturation.infrastructure.paiement.PaiementParSimulation;
+import fr.greenmove.facturation.infrastructure.persistance.FacturesEnMemoire;
+import fr.greenmove.facturation.infrastructure.persistance.UsagersEnMemoire;
+
 @Configuration
 public class ConfigurationFacturation {
 
-    // @Bean
-    // Paiement paiement(PaiementSimule simulation) { return new PaiementSurSimulation(simulation); }
-    //
-    // @Bean
-    // Abonnements abonnements(UsagersEnMemoire simulation) { return new AbonnementsSurSimulation(simulation); }
-    //
-    // @Bean
-    // Factures factures() { return new FacturesEnMemoire(); }
-    //
-    // @Bean
-    // ServiceFacturation serviceFacturation(Factures factures, Paiement paiement, Abonnements abonnements) {
-    //     return new ServiceFacturation(factures, paiement, abonnements, GrilleTarifaire.standard());
-    // }
+    @Bean
+    public Factures factures() {
+        return new FacturesEnMemoire();
+    }
+
+    @Bean
+    public GrilleTarifaire grilleTarifaire() {
+        return new GrilleTarifaire();
+    }
+
+    @Bean
+    public Paiement paiement(PaiementSimule paiementSimule) {
+        return new PaiementParSimulation(paiementSimule);
+    }
+
+    @Bean
+    public Abonnements abonnements(UsagersEnMemoire usagersEnMemoire) {
+        return new AbonnementsParUsagers(usagersEnMemoire);
+    }
+
+    @Bean
+    public ServiceFacturation serviceFacturation(
+            Factures factures,
+            Paiement paiement,
+            Abonnements abonnements,
+            GrilleTarifaire grilleTarifaire) {
+        return new ServiceFacturation(factures, paiement, abonnements, grilleTarifaire);
+    }
 }
