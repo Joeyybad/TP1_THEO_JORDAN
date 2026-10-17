@@ -2,11 +2,13 @@ package fr.greenmove.facturation.application;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import fr.greenmove.facturation.domaine.*;
+import fr.greenmove.facturation.domaine.erreurs.FactureDejaPayee;
+import fr.greenmove.facturation.domaine.erreurs.FactureInconnue;
+import fr.greenmove.facturation.domaine.erreurs.PaiementEncoreRefuse;
 import fr.greenmove.facturation.domaine.ports.Abonnements;
 import fr.greenmove.facturation.domaine.ports.Factures;
 import fr.greenmove.facturation.domaine.ports.Paiement;
@@ -32,18 +34,17 @@ public class ServiceFacturation implements EmettreFacture, ConsulterFacture, Reg
     @Override
     public Facture emettre(IdLocation location, IdUsager usager, TypeVehicule type, Duration duree) {
 
-        // Verification de l'existence de la facture pour la location (idempotence)
+        // Vérification de l'existence de la facture pour la location (idempotence)
         Optional<Facture> factureExistante = factures.parLocation(location);
         if (factureExistante.isPresent()) {
             return factureExistante.get();
         }
 
-        // Calcul du montant en fonction de la grille et l'abonnement ( /!\ completer
-        // calculer dans grille tarifaire )
+        // Calcul du montant en fonction de la grille et de l'abonnement
         boolean abonne = abonnements.estAbonne(usager);
-        Montant montant = grilleTarifaire.calculer(type,duree,abonne);
+        Montant montant = grilleTarifaire.calculer(type, duree, abonne);
 
-        // Débit chez le presta
+        // Débit chez le prestataire
         Optional<ReferencePaiement> refPaiement = paiement.debiter(usager, montant);
 
         IdFacture nouvelId = new IdFacture(UUID.randomUUID().toString());
@@ -65,13 +66,12 @@ public class ServiceFacturation implements EmettreFacture, ConsulterFacture, Reg
     @Override
     public Facture regulariser(IdFacture idFacture) {
         Facture facture = factures.parId(idFacture)
-                .orElseThrow(() -> new IllegalArgumentException("Facture inconnue : " + idFacture.valeur()));
+                .orElseThrow(() -> new FactureInconnue(idFacture.valeur()));
 
         if (facture.statut() == Statut.PAYEE) {
-            return facture;
+            throw new FactureDejaPayee();
         }
 
-        // Nouvelle tentative de débit lors d'une régularisation
         Optional<ReferencePaiement> refPaiement = paiement.debiter(facture.idUsager(), facture.montant());
         if (refPaiement.isPresent()) {
             facture.regulariser(refPaiement.get());
@@ -79,17 +79,12 @@ public class ServiceFacturation implements EmettreFacture, ConsulterFacture, Reg
             return facture;
         }
 
-        // Si echec du paiement
-        throw new fr.greenmove.facturation.domaine.erreurs.PaiementEncoreRefuse(idFacture.valeur());
+        throw new PaiementEncoreRefuse(idFacture.valeur());
     }
 
     @Override
-    public List<Facture> impayesDe(IdUsager idUsager) {
-        return factures.impayeesDe(idUsager);
-    }
-
-    @Override
-    public boolean aDesImpayes(IdUsager idUsager) {
-        return !factures.impayeesDe(idUsager).isEmpty();
+    public boolean aDesImpayes(String idUsager) {
+        IdUsager usager = new IdUsager(idUsager);
+        return !factures.impayeesDe(usager).isEmpty();
     }
 }

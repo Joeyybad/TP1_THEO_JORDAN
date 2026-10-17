@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="fr.greenmove.ArchitectureTest" time="3.54" tests="7" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="fr.greenmove.ArchitectureTest" time="4.26" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,7 +13,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/target/surefire/surefirebooter-20261015233811782_3.jar /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/target/surefire 2026-10-15T23-38-11_471-jvmRun1 surefire-20261015233811782_1tmp surefire_0-20261015233811782_2tmp"/>
+    <property name="sun.java.command" value="/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/target/surefire/surefirebooter-20261017125605771_3.jar /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/target/surefire 2026-10-17T12-56-05_410-jvmRun1 surefire-20261017125605771_1tmp surefire_0-20261017125605771_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="test" value="ArchitectureTest"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/target/surefire/surefirebooter-20261015233811782_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/target/surefire/surefirebooter-20261017125605771_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="21.0.5+9-LTS-239"/>
@@ -59,36 +59,14 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="le_domaine_ne_depend_d_aucune_technique" classname="ArchitectureTest" time="3.467">
-    <failure message="Architecture Violation [Priority: MEDIUM] - Rule &apos;no classes that reside in a package &apos;..domaine..&apos; should depend on classes that reside in any package [&apos;..infrastructure..&apos;, &apos;..application..&apos;, &apos;fr.greenmove.exterieur..&apos;, &apos;org.springframework..&apos;, &apos;jakarta.persistence..&apos;, &apos;com.fasterxml..&apos;]&apos; was violated (12 times):&#10;Class &lt;fr.greenmove.facturation.domaine.application.ServiceFacturation&gt; implements interface &lt;fr.greenmove.facturation.domaine.application.ConsulterFacture&gt; in (ServiceFacturation.java:0)&#10;Class &lt;fr.greenmove.facturation.domaine.application.ServiceFacturation&gt; implements interface &lt;fr.greenmove.facturation.domaine.application.EmettreFacture&gt; in (ServiceFacturation.java:0)&#10;Class &lt;fr.greenmove.facturation.domaine.application.ServiceFacturation&gt; implements interface &lt;fr.greenmove.facturation.domaine.application.RegulariserFacture&gt; in (ServiceFacturation.java:0)&#10;Constructor &lt;fr.greenmove.facturation.domaine.application.ServiceFacturation.&lt;init&gt;(fr.greenmove.facturation.domaine.application.EmettreFacture, fr.greenmove.facturation.domaine.application.ConsulterFacture, fr.greenmove.facturation.domaine.application.RegulariserFacture, fr.greenmove.facturation.domaine.ports.Abonnements, fr.greenmove.facturation.domaine.GrilleTarifaire)&gt; has parameter of type &lt;fr.greenmove.facturation.domaine.application.ConsulterFacture&gt; in (ServiceFacturation.java:0)&#10;Constructor &lt;fr.greenmove.facturation.domaine.application.ServiceFacturation.&lt;init&gt;(fr.greenmove.facturation.domaine.application.EmettreFacture, fr.greenmove.facturation.domaine.application.ConsulterFacture, fr.greenmove.facturation.domaine.application.RegulariserFacture, fr.greenmove.facturation.domaine.ports.Abonnements, fr.greenmove.facturation.domaine.GrilleTarifaire)&gt; has parameter of type &lt;fr.greenmove.facturation.domaine.application.EmettreFacture&gt; in (ServiceFacturation.java:0)&#10;Constructor &lt;fr.greenmove.facturation.domaine.application.ServiceFacturation.&lt;init&gt;(fr.greenmove.facturation.domaine.application.EmettreFacture, fr.greenmove.facturation.domaine.application.ConsulterFacture, fr.greenmove.facturation.domaine.application.RegulariserFacture, fr.greenmove.facturation.domaine.ports.Abonnements, fr.greenmove.facturation.domaine.GrilleTarifaire)&gt; has parameter of type &lt;fr.greenmove.facturation.domaine.application.RegulariserFacture&gt; in (ServiceFacturation.java:0)&#10;Field &lt;fr.greenmove.facturation.domaine.application.ServiceFacturation.consulteur&gt; has type &lt;fr.greenmove.facturation.domaine.application.ConsulterFacture&gt; in (ServiceFacturation.java:0)&#10;Field &lt;fr.greenmove.facturation.domaine.application.ServiceFacturation.emetteur&gt; has type &lt;fr.greenmove.facturation.domaine.application.EmettreFacture&gt; in (ServiceFacturation.java:0)&#10;Field &lt;fr.greenmove.facturation.domaine.application.ServiceFacturation.regulariseur&gt; has type &lt;fr.greenmove.facturation.domaine.application.RegulariserFacture&gt; in (ServiceFacturation.java:0)&#10;Method &lt;fr.greenmove.facturation.domaine.application.ServiceFacturation.consulter(fr.greenmove.facturation.domaine.IdFacture)&gt; calls method &lt;fr.greenmove.facturation.domaine.application.ConsulterFacture.consulter(fr.greenmove.facturation.domaine.IdFacture)&gt; in (ServiceFacturation.java:37)&#10;Method &lt;fr.greenmove.facturation.domaine.application.ServiceFacturation.emettre(fr.greenmove.facturation.domaine.IdLocation, fr.greenmove.facturation.domaine.IdUsager, fr.greenmove.facturation.domaine.TypeVehicule, java.time.Duration)&gt; calls method &lt;fr.greenmove.facturation.domaine.application.EmettreFacture.emettre(fr.greenmove.facturation.domaine.IdLocation, fr.greenmove.facturation.domaine.IdUsager, fr.greenmove.facturation.domaine.TypeVehicule, java.time.Duration)&gt; in (ServiceFacturation.java:27)&#10;Method &lt;fr.greenmove.facturation.domaine.application.ServiceFacturation.regulariser(fr.greenmove.facturation.domaine.IdFacture)&gt; calls method &lt;fr.greenmove.facturation.domaine.application.RegulariserFacture.regulariser(fr.greenmove.facturation.domaine.IdFacture)&gt; in (ServiceFacturation.java:32)" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: 
-Architecture Violation [Priority: MEDIUM] - Rule 'no classes that reside in a package '..domaine..' should depend on classes that reside in any package ['..infrastructure..', '..application..', 'fr.greenmove.exterieur..', 'org.springframework..', 'jakarta.persistence..', 'com.fasterxml..']' was violated (12 times):
-Class <fr.greenmove.facturation.domaine.application.ServiceFacturation> implements interface <fr.greenmove.facturation.domaine.application.ConsulterFacture> in (ServiceFacturation.java:0)
-Class <fr.greenmove.facturation.domaine.application.ServiceFacturation> implements interface <fr.greenmove.facturation.domaine.application.EmettreFacture> in (ServiceFacturation.java:0)
-Class <fr.greenmove.facturation.domaine.application.ServiceFacturation> implements interface <fr.greenmove.facturation.domaine.application.RegulariserFacture> in (ServiceFacturation.java:0)
-Constructor <fr.greenmove.facturation.domaine.application.ServiceFacturation.<init>(fr.greenmove.facturation.domaine.application.EmettreFacture, fr.greenmove.facturation.domaine.application.ConsulterFacture, fr.greenmove.facturation.domaine.application.RegulariserFacture, fr.greenmove.facturation.domaine.ports.Abonnements, fr.greenmove.facturation.domaine.GrilleTarifaire)> has parameter of type <fr.greenmove.facturation.domaine.application.ConsulterFacture> in (ServiceFacturation.java:0)
-Constructor <fr.greenmove.facturation.domaine.application.ServiceFacturation.<init>(fr.greenmove.facturation.domaine.application.EmettreFacture, fr.greenmove.facturation.domaine.application.ConsulterFacture, fr.greenmove.facturation.domaine.application.RegulariserFacture, fr.greenmove.facturation.domaine.ports.Abonnements, fr.greenmove.facturation.domaine.GrilleTarifaire)> has parameter of type <fr.greenmove.facturation.domaine.application.EmettreFacture> in (ServiceFacturation.java:0)
-Constructor <fr.greenmove.facturation.domaine.application.ServiceFacturation.<init>(fr.greenmove.facturation.domaine.application.EmettreFacture, fr.greenmove.facturation.domaine.application.ConsulterFacture, fr.greenmove.facturation.domaine.application.RegulariserFacture, fr.greenmove.facturation.domaine.ports.Abonnements, fr.greenmove.facturation.domaine.GrilleTarifaire)> has parameter of type <fr.greenmove.facturation.domaine.application.RegulariserFacture> in (ServiceFacturation.java:0)
-Field <fr.greenmove.facturation.domaine.application.ServiceFacturation.consulteur> has type <fr.greenmove.facturation.domaine.application.ConsulterFacture> in (ServiceFacturation.java:0)
-Field <fr.greenmove.facturation.domaine.application.ServiceFacturation.emetteur> has type <fr.greenmove.facturation.domaine.application.EmettreFacture> in (ServiceFacturation.java:0)
-Field <fr.greenmove.facturation.domaine.application.ServiceFacturation.regulariseur> has type <fr.greenmove.facturation.domaine.application.RegulariserFacture> in (ServiceFacturation.java:0)
-Method <fr.greenmove.facturation.domaine.application.ServiceFacturation.consulter(fr.greenmove.facturation.domaine.IdFacture)> calls method <fr.greenmove.facturation.domaine.application.ConsulterFacture.consulter(fr.greenmove.facturation.domaine.IdFacture)> in (ServiceFacturation.java:37)
-Method <fr.greenmove.facturation.domaine.application.ServiceFacturation.emettre(fr.greenmove.facturation.domaine.IdLocation, fr.greenmove.facturation.domaine.IdUsager, fr.greenmove.facturation.domaine.TypeVehicule, java.time.Duration)> calls method <fr.greenmove.facturation.domaine.application.EmettreFacture.emettre(fr.greenmove.facturation.domaine.IdLocation, fr.greenmove.facturation.domaine.IdUsager, fr.greenmove.facturation.domaine.TypeVehicule, java.time.Duration)> in (ServiceFacturation.java:27)
-Method <fr.greenmove.facturation.domaine.application.ServiceFacturation.regulariser(fr.greenmove.facturation.domaine.IdFacture)> calls method <fr.greenmove.facturation.domaine.application.RegulariserFacture.regulariser(fr.greenmove.facturation.domaine.IdFacture)> in (ServiceFacturation.java:32)
-	at com.tngtech.archunit.lang.ArchRule$Assertions.assertNoViolation(ArchRule.java:94)
-	at com.tngtech.archunit.lang.ArchRule$Assertions.check(ArchRule.java:86)
-	at com.tngtech.archunit.lang.ArchRule$Factory$SimpleArchRule.check(ArchRule.java:165)
-	at com.tngtech.archunit.junit.internal.ArchUnitTestDescriptor$ArchUnitRuleDescriptor.execute(ArchUnitTestDescriptor.java:168)
-	at com.tngtech.archunit.junit.internal.ArchUnitTestDescriptor$ArchUnitRuleDescriptor.execute(ArchUnitTestDescriptor.java:151)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-]]></failure>
-    <system-out><![CDATA[23:38:14.089 [main] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 21.0.5
+  <testcase name="le_domaine_ne_depend_d_aucune_technique" classname="ArchitectureTest" time="4.119">
+    <system-out><![CDATA[12:56:08.728 [main] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 21.0.5
 ]]></system-out>
   </testcase>
-  <testcase name="l_application_ne_depend_d_aucun_adaptateur" classname="ArchitectureTest" time="0.008"/>
-  <testcase name="le_domaine_ne_lit_pas_l_horloge_systeme" classname="ArchitectureTest" time="0.003"/>
-  <testcase name="le_coeur_de_location_ignore_facturation" classname="ArchitectureTest" time="0.007"/>
-  <testcase name="le_coeur_de_facturation_ignore_location" classname="ArchitectureTest" time="0.004"/>
-  <testcase name="location_ne_voit_de_facturation_que_ses_ports_entrants" classname="ArchitectureTest" time="0.019"/>
-  <testcase name="facturation_ne_voit_de_location_que_ses_evenements_et_ses_ports_entrants" classname="ArchitectureTest" time="0.003"/>
+  <testcase name="l_application_ne_depend_d_aucun_adaptateur" classname="ArchitectureTest" time="0.024"/>
+  <testcase name="le_domaine_ne_lit_pas_l_horloge_systeme" classname="ArchitectureTest" time="0.007"/>
+  <testcase name="le_coeur_de_location_ignore_facturation" classname="ArchitectureTest" time="0.011"/>
+  <testcase name="le_coeur_de_facturation_ignore_location" classname="ArchitectureTest" time="0.006"/>
+  <testcase name="location_ne_voit_de_facturation_que_ses_ports_entrants" classname="ArchitectureTest" time="0.033"/>
+  <testcase name="facturation_ne_voit_de_location_que_ses_evenements_et_ses_ports_entrants" classname="ArchitectureTest" time="0.015"/>
 </testsuite>

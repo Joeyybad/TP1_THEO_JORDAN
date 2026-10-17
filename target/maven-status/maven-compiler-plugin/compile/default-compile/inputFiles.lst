@@ -35,13 +35,13 @@
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/facturation/infrastructure/evenements/package-info.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/facturation/infrastructure/paiement/PaiementParSimulation.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/facturation/infrastructure/persistance/FacturesEnMemoire.java
-/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/facturation/infrastructure/persistance/UsagersEnMemoire.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/facturation/infrastructure/persistance/package-info.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/facturation/infrastructure/rest/FacturationController.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/facturation/infrastructure/rest/dto/FactureDto.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/facturation/infrastructure/rest/package-info.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/facturation/package-info.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/location/application/ConsulterLocation.java
+/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/location/application/ConsulterUsagers.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/location/application/DemarrerLocation.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/location/application/Recu.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/location/application/ServiceLocation.java
@@ -83,6 +83,7 @@
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/location/infrastructure/persistance/LocationJpaRepository.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/location/infrastructure/persistance/LocationMapper.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/location/infrastructure/persistance/LocationsJpa.java
+/Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/location/infrastructure/persistance/UsagersEnMemoire.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/location/infrastructure/persistance/package-info.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/location/infrastructure/rest/LocationController.java
 /Users/nkungajordan/Desktop/EADL-EKOD/ARCHITECTURE/TP1_THEO_JORDAN/src/main/java/fr/greenmove/location/infrastructure/rest/PingController.java

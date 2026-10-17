@@ -1,14 +1,15 @@
-package fr.greenmove.facturation.infrastructure.persistance;
+package fr.greenmove.location.infrastructure.persistance;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
+import fr.greenmove.location.application.ConsulterUsagers;
 import fr.greenmove.location.domaine.IdUsager;
 import fr.greenmove.location.domaine.Usager;
 import fr.greenmove.location.domaine.Ports.Usagers;
 
-public class UsagersEnMemoire implements Usagers {
+public class UsagersEnMemoire implements Usagers, ConsulterUsagers {
 
     private final Map<IdUsager, Usager> usagers = new ConcurrentHashMap<>();
 
@@ -19,6 +20,14 @@ public class UsagersEnMemoire implements Usagers {
 
     public void ajouter(Usager usager) {
         this.usagers.put(usager.id(), usager);
+    }
+
+    public boolean estAbonne(String idUsager) {
+        return this.usagers.values().stream()
+                .filter(u -> u.id().valeur().equals(idUsager))
+                .findFirst()
+                .map(Usager::abonne)
+                .orElse(false);
     }
 
     public Optional<Usager> trouver(String id) {
