@@ -41,7 +41,7 @@ public class ServiceFacturation implements EmettreFacture, ConsulterFacture, Reg
         // Calcul du montant en fonction de la grille et l'abonnement ( /!\ completer
         // calculer dans grille tarifaire )
         boolean abonne = abonnements.estAbonne(usager);
-        Montant montant = grilleTarifaire.calculer(duree, type, abonne);
+        Montant montant = grilleTarifaire.calculer(type,duree,abonne);
 
         // Débit chez le presta
         Optional<ReferencePaiement> refPaiement = paiement.debiter(usager, montant);
