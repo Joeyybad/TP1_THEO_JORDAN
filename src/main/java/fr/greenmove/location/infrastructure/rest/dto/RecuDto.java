@@ -8,13 +8,16 @@ public record RecuDto(
         String idLocation,
         Instant debut,
         Instant fin,
-        long dureeMinutes) {
+        long dureeMinutes,
+        String statut) {
+
     public RecuDto(Recu recu) {
         this(
                 recu.idLocation().valeur(),
                 recu.debut(),
                 recu.fin(),
-                recu.duree().toMinutes() // ou recu.dureeMinutes() selon ton Recu
+                recu.duree().toMinutes(),
+                "TERMINEE"
         );
     }
 }

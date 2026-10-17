@@ -9,6 +9,7 @@ import fr.greenmove.facturation.domaine.ReferencePaiement;
 import fr.greenmove.facturation.domaine.ports.Paiement;
 
 public class PaiementParSimulation implements Paiement {
+
     private final PaiementSimule simulateur;
 
     public PaiementParSimulation(PaiementSimule simulateur) {
@@ -17,10 +18,16 @@ public class PaiementParSimulation implements Paiement {
 
     @Override
     public Optional<ReferencePaiement> debiter(IdUsager usager, Montant montant) {
-        String reference = simulateur.debiter(usager.valeur(), montant.getCentimes());
+        try {
+            String reference = simulateur.debiter(
+                    usager.valeur(),
+                    montant.getCentimes()
+            );
 
-        return Optional.ofNullable(reference)
-                .filter(ref -> !ref.isBlank())
-                .map(ReferencePaiement::new);
+            return Optional.of(new ReferencePaiement(reference));
+
+        } catch (PaiementSimule.DebitRefuse e) {
+            return Optional.empty();
+        }
     }
 }

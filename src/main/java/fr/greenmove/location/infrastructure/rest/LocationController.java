@@ -2,6 +2,7 @@ package fr.greenmove.location.infrastructure.rest;
 
 import java.net.URI;
 
+import fr.greenmove.location.infrastructure.rest.dto.LocationCreeDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,17 +41,36 @@ public class LocationController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> demarrer(@RequestBody DemandeDemarrageDto demande) {
+    public ResponseEntity<LocationCreeDto> demarrer(
+            @RequestBody DemandeDemarrageDto demande) {
+
         try {
             IdLocation idCree = demarrerLocation.demarrer(
-                    new IdUsager(demande.idUsager()),
-                    new IdVehicule(demande.idVehicule()));
-            // Retourne 201 Created avec l'URI de la nouvelle ressource
-            return ResponseEntity.created(URI.create("/locations/" + idCree.valeur())).build();
+                    new IdUsager(demande.usager()),
+                    new IdVehicule(demande.vehicule())
+            );
+
+            var reponse = new LocationCreeDto(
+                    idCree.valeur(),
+                    "EN_COURS"
+            );
+
+            return ResponseEntity
+                    .created(URI.create("/locations/" + idCree.valeur()))
+                    .body(reponse);
+
         } catch (UsagerInconnu | VehiculeInconnu e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } catch (VehiculeIndisponible | LocationDejaEnCours | UsagerBloquePourImpayes e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .build();
+
+        } catch (VehiculeIndisponible
+                 | LocationDejaEnCours
+                 | UsagerBloquePourImpayes e) {
+
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .build();
         }
     }
 

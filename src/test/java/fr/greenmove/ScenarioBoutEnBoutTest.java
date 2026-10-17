@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-@Disabled("À activer quand les deux hexagones sont câblés (annexe C de l'énoncé)")
+//@Disabled("À activer quand les deux hexagones sont câblés (annexe C de l'énoncé)")
 class ScenarioBoutEnBoutTest {
 
     @Autowired

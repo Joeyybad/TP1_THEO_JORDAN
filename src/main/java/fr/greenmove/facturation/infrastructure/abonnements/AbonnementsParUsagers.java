@@ -1,19 +1,21 @@
 package fr.greenmove.facturation.infrastructure.abonnements;
 
+import fr.greenmove.exterieur.UsagersEnMemoire;
 import fr.greenmove.facturation.domaine.IdUsager;
 import fr.greenmove.facturation.domaine.ports.Abonnements;
-import fr.greenmove.location.application.ConsulterUsagers;
 
 public class AbonnementsParUsagers implements Abonnements {
 
-    private final ConsulterUsagers usagers;
+    private final UsagersEnMemoire usagers;
 
-    public AbonnementsParUsagers(ConsulterUsagers usagers) {
+    public AbonnementsParUsagers(UsagersEnMemoire usagers) {
         this.usagers = usagers;
     }
 
     @Override
     public boolean estAbonne(IdUsager usager) {
-        return usagers.estAbonne(usager.valeur());
+        return usagers.parId(usager.valeur())
+                .map(UsagersEnMemoire.EntreeUsager::abonne)
+                .orElse(false);
     }
 }

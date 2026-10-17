@@ -12,7 +12,7 @@ import fr.greenmove.facturation.domaine.ports.Paiement;
 import fr.greenmove.facturation.infrastructure.abonnements.AbonnementsParUsagers;
 import fr.greenmove.facturation.infrastructure.paiement.PaiementParSimulation;
 import fr.greenmove.facturation.infrastructure.persistance.FacturesEnMemoire;
-import fr.greenmove.location.application.ConsulterUsagers;
+import fr.greenmove.exterieur.UsagersEnMemoire;
 
 @Configuration
 public class ConfigurationFacturation {
@@ -33,10 +33,9 @@ public class ConfigurationFacturation {
     }
 
     @Bean
-    public Abonnements abonnements(ConsulterUsagers usagers) {
+    public Abonnements abonnements(UsagersEnMemoire usagers) {
         return new AbonnementsParUsagers(usagers);
     }
-
     @Bean
     public ServiceFacturation serviceFacturation(
             Factures factures,
